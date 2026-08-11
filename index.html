@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViveSmart - Energía Solar & Seguridad</title>
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos Generales */
+        :root {
+            --primary-blue: #2E4A62;
+            --primary-yellow: #FDEB9C;
+            --accent-orange: #F7931E;
+            --dark-text: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: var(--dark-text);
+            scroll-behavior: smooth;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Navegación */
+        .navbar {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--primary-yellow); }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a:hover { color: var(--primary-yellow); transition: 0.3s; }
+
+        /* Botón Hamburguesa (Mobile) */
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+
+        /* Sección Inicio (Hero) */
+        .hero {
+            background-color: var(--primary-yellow);
+            padding: 80px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 85vh;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .btn-cta {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn-cta:hover {
+            background-color: #1f3649;
+            transform: scale(1.05);
+        }
+
+        /* Sección Productos / Tienda */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin: 60px 0 10px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 { color: var(--primary-blue); margin: 10px 0; }
+        .product-card p { color: #666; font-size: 0.9rem; margin-bottom: 5px; }
+        
+        .price-tag {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-orange);
+            display: block;
+            margin: 15px 0;
+        }
+
+        .btn-buy {
+            background-color: var(--accent-orange);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn-buy:hover { background-color: #d67d14; }
+
+        /* Sección Nosotros (Confianza y Garantía) */
+        #nosotros {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 80px 20px;
+            margin-top: 40px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .about-item i {
+            font-size: 3rem;
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+        }
+
+        .about-item h3 { margin-bottom: 10px; }
+        .about-item p { font-size: 0.95rem; opacity: 0.9; }
+
+        /* Sección Contacto */
+        #contacto {
+            padding: 60px 20px;
+            background-color: #fdfdfd;
+        }
+
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            justify-content: center;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h3 { color: var(--primary-blue); margin-bottom: 20px; }
+        .contact-info p { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .contact-form button {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        footer span { color: var(--primary-yellow); }
+
+        /* Responsividad (Mobile) */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: var(--primary-blue);
+                position: absolute;
+                top: 65px;
+                left: 0;
+                padding: 20px 0;
+            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-sun"></i> ViveSmart
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars" style="color: var(--primary-yellow);"></i>
+        </div>
+    </nav>
+
+    <!-- SECCIÓN INICIO -->
+    <section id="inicio" class="hero">
+        <h1>Tu Futuro es Solar con <br><span style="color:#1a1a1a;">ViveSmart</span></h1>
+        <p>Ahorra hasta un 80% en tu recibo de luz. Energía limpia, confiable y con garantía real para tu hogar, negocio y campo en Lima.</p>
+        <button class="btn-cta" onclick="document.getElementById('contacto').scrollIntoView();">Cotiza ahora</button>
+    </section>
+
+    <!-- SECCIÓN PRODUCTOS Y TIENDA -->
+    <section id="productos" class="container">
+        <h2 class="section-title">Nuestros Productos</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 20px;">Calidad garantizada e instalación profesional.</p>
+        
+        <div class="products-grid">
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1562016600-ece13e8ba570?auto=format&fit=crop&w=300&q=80" alt="Panel Solar">
+                <h3>Panel Solar 550W Mono</h3>
+                <p>Máxima eficiencia para tu techo. Tecnología half-cut.</p>
+                <span class="price-tag">Desde S/ 450.00</span>
+                <button class="btn-buy">Añadir al carrito</button>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=300&q=80" alt="Inversor Solar">
+                <h3>Inversor Híbrido 3kW</h3>
+                <p>Gestiona tu energía solar y de la red eléctrica.</p>
+                <span class="price-tag">Desde S/ 2,190.00</span>
+                <button class="btn-buy">Añadir al carrito</button>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1590577948011-c785a1c49832?auto=format&fit=crop&w=300&q=80" alt="Batería Solar">
+                <h3>Batería Litio 5.12 kWh</h3>
+                <p>Almacena tu energía y úsala de noche.</p>
+                <span class="price-tag">Desde S/ 4,500.00</span>
+                <button class="btn-buy">Añadir al carrito</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN NOSOTROS / CONFIANZA -->
+    <section id="nosotros">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--primary-yellow);">¿Por qué elegirnos?</h2>
+            <div class="about-grid">
+                <div class="about-item">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Garantía Real</h3>
+                    <p>Ofrecemos hasta 5 años de garantía en todos nuestros equipos y 1 año en mano de obra de instalación.</p>
+                </div>
+                <div class="about-item">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Compras Seguras</h3>
+                    <p>Realiza tus compras con total confianza. Somos distribuidores oficiales de las mejores marcas del mundo.</p>
+                </div>
+                <div class="about-item">
+                    <i class="fas fa-tools"></i>
+                    <h3>Instalación Profesional</h3>
+                    <p>Nuestro equipo técnico certificado se encarga de todo, desde el diseño hasta la puesta en marcha.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO -->
+    <section id="contacto" class="container">
+        <h2 class="section-title">Contáctanos</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 40px;">¿Listo para dar el paso? Escríbenos y te ayudamos.</p>
+        
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3>Datos de contacto</h3>
+                <p><i class="fas fa-map-marker-alt" style="color:var(--primary-blue);"></i> Lima, Perú</p>
+                <p><i class="fas fa-phone" style="color:var(--primary-blue);"></i> +51 990 123 456</p>
+                <p><i class="fas fa-envelope" style="color:var(--primary-blue);"></i> hola@vivesmart.com</p>
+            </div>
+            <form class="contact-form">
+                <h3>Envíanos un mensaje</h3>
+                <input type="text" placeholder="Tu nombre completo" required>
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <input type="text" placeholder="Teléfono de contacto">
+                <textarea rows="4" placeholder="Cuéntanos qué necesitas (Ej: cotización de 5 paneles)"></textarea>
+                <button type="submit">Enviar mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 ViveSmart. Creado con <span>❤️</span> para un futuro sostenible.</p>
+    </footer>
+
+    <!-- SCRIPT MENU HAMBURGUESA -->
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
