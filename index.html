@@ -1,10 +1,205 @@
 <!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><title>ViveSmart</title></head>
-<body style="text-align:center; padding:50px; font-family:sans-serif; background:#FDEB9C;">
-    <h1 style="color:#2E4A62;">ViveSmart</h1>
-    <h2>Estamos preparando nuestra nueva tienda virtual</h2>
-    <p>Muy pronto tendremos disponible el sistema de pagos y login.</p>
-    <p style="margin-top:30px; color:#666;">Si tienes consultas, escríbenos a: <strong>hola@vivesmart.com</strong></p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViveSmart | Próximamente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #FDEB9C 0%, #F7D774 100%);
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            max-width: 700px;
+            width: 100%;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(46, 74, 98, 0.15);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #2E4A62;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .logo span {
+            color: #F2B705;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            color: #2E4A62;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown div {
+            background: #2E4A62;
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 12px;
+            min-width: 80px;
+        }
+
+        .countdown div span {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .countdown div small {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        input[type="email"] {
+            flex: 1;
+            min-width: 220px;
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input[type="email"]:focus {
+            border-color: #F2B705;
+        }
+
+        button {
+            padding: 14px 28px;
+            background: #2E4A62;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #F2B705;
+            color: #2E4A62;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 35px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .footer a {
+            color: #2E4A62;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 35px 20px; }
+            .logo { font-size: 2rem; }
+            h1 { font-size: 1.3rem; }
+            .countdown div { min-width: 65px; padding: 10px 12px; }
+            .countdown div span { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">Vive<span>Smart</span></div>
+        <h1>Estamos preparando nuestra nueva tienda virtual</h1>
+        <p>Muy pronto tendrás disponible el sistema de pagos, login y todos nuestros productos. Déjanos tu correo y te avisaremos el día del lanzamiento.</p>
+
+        <div class="countdown">
+            <div><span id="dias">00</span><small>Días</small></div>
+            <div><span id="horas">00</span><small>Horas</small></div>
+            <div><span id="minutos">00</span><small>Min</small></div>
+            <div><span id="segundos">00</span><small>Seg</small></div>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('¡Gracias! Te avisaremos cuando lancemos ViveSmart.'); this.reset();">
+            <input type="email" placeholder="Tu correo electrónico" required>
+            <button type="submit">Avísame</button>
+        </form>
+
+        <div class="footer">
+            ¿Tienes consultas? Escríbenos a <a href="mailto:hola@vivesmart.com">hola@vivesmart.com</a>
+        </div>
+    </div>
+
+    <script>
+        // Fecha de lanzamiento (puedes cambiarla)
+        const fechaLanzamiento = new Date("2026-12-31T00:00:00").getTime();
+
+        const actualizarContador = () => {
+            const ahora = new Date().getTime();
+            const distancia = fechaLanzamiento - ahora;
+
+            if (distancia < 0) {
+                document.querySelector('.countdown').innerHTML = "<p style='color:#2E4A62; font-weight:700;'>¡Ya estamos en línea!</p>";
+                return;
+            }
+
+            const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+            document.getElementById("dias").textContent = String(dias).padStart(2, "0");
+            document.getElementById("horas").textContent = String(horas).padStart(2, "0");
+            document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
+            document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
+        };
+
+        actualizarContador();
+        setInterval(actualizarContador, 1000);
+    </script>
 </body>
 </html>
